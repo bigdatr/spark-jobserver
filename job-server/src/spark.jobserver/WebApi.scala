@@ -17,6 +17,7 @@ import spray.http.MediaTypes
 import spray.http.StatusCodes
 import spray.httpx.SprayJsonSupport.sprayJsonMarshaller
 import spray.json.DefaultJsonProtocol._
+import spray.json._
 import spray.routing.{ HttpService, Route, RequestContext }
 
 class WebApi(system: ActorSystem,
@@ -361,8 +362,11 @@ class WebApi(system: ActorSystem,
     case item         => Map(ResultKey -> item)
   }
 
-  def resultToTable(result: Any): Map[String, Any] = {
-    Map(StatusKey -> "OK", ResultKey -> result)
+  def resultToTable(result: Any): JsObject = {
+    result match {
+      case jsValue: JsValue => JsObject(StatusKey -> JsString("OK"), ResultKey -> jsValue)
+      case _ => JsObject(Map(StatusKey -> JsString("OK"), ResultKey -> result.toJson))
+    }
   }
 
   def formatException(t: Throwable): Any =
