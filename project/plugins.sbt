@@ -18,4 +18,4 @@ addSbtPlugin("me.lessis" % "ls-sbt" % "0.1.3")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.8.5")
 
-addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.2.0")
+addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.4.1")

@@ -128,7 +128,7 @@ object JobServerBuild extends Build {
       }
     },
     imageNames in docker := Seq(
-      sbtdocker.ImageName(namespace = Some("velvia"),
+      sbtdocker.ImageName(namespace = Some("bigdatr"),
                           repository = "spark-jobserver",
                           tag = Some(version.value))
     )
